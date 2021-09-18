@@ -1,6 +1,6 @@
 package com.geekbrains.popularlibraries
 
-class CountersModel {
+object CountersModel {
 
     private val counters = mutableListOf(0, 0, 0)
 

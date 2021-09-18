@@ -1,6 +1,9 @@
 package com.geekbrains.popularlibraries
 
-class MainPresenter(private val view:MainView, private val model: CountersModel) {
+class MainPresenter(
+    private val view:MainView,
+    private val model: CountersModel
+    ) {
 
     fun counterOneButtonClick(){
         val counter = model.next(0).toString()
