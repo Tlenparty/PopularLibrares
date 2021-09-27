@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.popularlibrares.databinding.FragmentMainRecyclerItemBinding
-import com.geekbrains.popularlibraries.model.entites.GithubUser
 
 class UsersRVAdapter(private val presenter: IUserListPresenter) :
     RecyclerView.Adapter<UsersRVAdapter.ViewHolder>() {
@@ -20,7 +19,7 @@ class UsersRVAdapter(private val presenter: IUserListPresenter) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) =
         presenter.bindView(holder.apply {
-            pos = position
+            currentPosition = position
         })
 
     override fun getItemCount(): Int = presenter.getCount()
@@ -32,7 +31,7 @@ class UsersRVAdapter(private val presenter: IUserListPresenter) :
             vb.tvLogin.text = text
         }
 
-        override var pos = -1
+        override var currentPosition = -1
 
     }
 }

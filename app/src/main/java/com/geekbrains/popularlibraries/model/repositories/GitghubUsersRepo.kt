@@ -10,4 +10,10 @@ class GithubUsersRepo {
     )
 
     fun getUsers() : List<GithubUser>  = repositories
+
+    fun getUser(userLogin: String): GithubUser {
+        return repositories.first {
+            it.login == userLogin
+        }
+    }
 }

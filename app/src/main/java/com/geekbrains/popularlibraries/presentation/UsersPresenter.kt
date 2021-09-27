@@ -2,6 +2,7 @@ package com.geekbrains.popularlibraries.presentation
 
 import com.geekbrains.popularlibraries.framework.ui.adapters.IUserListPresenter
 import com.geekbrains.popularlibraries.framework.ui.adapters.UserItemView
+import com.geekbrains.popularlibraries.framework.ui.screens.UserScreen
 import com.geekbrains.popularlibraries.framework.ui.view.users_fragment.UsersView
 import com.geekbrains.popularlibraries.model.entites.GithubUser
 import com.geekbrains.popularlibraries.model.entites.GithubUsersRepo
@@ -19,7 +20,7 @@ class UsersPresenter(
         override var itemClickListener: ((UserItemView) -> Unit)? = null
 
         override fun bindView(view: UserItemView) {
-            val user = users[view.pos]
+            val user = users[view.currentPosition]
             view.setLogin(user.login)
         }
 
@@ -33,7 +34,9 @@ class UsersPresenter(
         super.onFirstViewAttach()
         viewState.init()
         loadData()
-        usersListPresenter.itemClickListener = { itemView ->
+        usersListPresenter.itemClickListener = {
+            val userLogin = usersListPresenter.users[it.currentPosition].login
+            router.navigateTo(UserScreen(userLogin))
         }
     }
 
