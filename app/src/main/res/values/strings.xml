@@ -3,4 +3,10 @@
     <string name="counter_one">Счетчик 1</string>
     <string name="counter_two">Счетчик 2</string>
     <string name="counter_three">Счетчик 3</string>
+    <string name="onboarding_message">Нажимайте на кнопку и увеличивайте ее счетчик</string>
+    <string name="counter_message">Счетчик увеличен!</string>
+    <string name="app_name_counters">Counters</string>
+    <string name="app_name_users">Users</string>
+    <string name="user_id_title">Идентификатор</string>
+    <string name="user_name_title">Имя</string>
 </resources>
