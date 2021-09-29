@@ -11,4 +11,6 @@ interface UsersView : MvpView {
 
     fun updateList()
 
+    fun showException(throwable: Throwable)
+
 }
