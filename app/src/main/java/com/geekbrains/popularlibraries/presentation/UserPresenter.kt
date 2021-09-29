@@ -1,31 +1,44 @@
 package com.geekbrains.popularlibraries.presentation
 
 import com.geekbrains.popularlibraries.framework.ui.view.user_fragment.UserView
-import com.geekbrains.popularlibraries.model.entites.GithubUsersRepo
+import com.geekbrains.popularlibraries.model.repositories.GithubUsersLocalRepositoryImpl
 import com.github.terrakok.cicerone.Router
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import moxy.MvpPresenter
 
 class UserPresenter(
-    private val usersRepo: GithubUsersRepo,
+    private val usersRepository: GithubUsersLocalRepositoryImpl,
     private val router: Router,
-    private val userLogin:String?
-): MvpPresenter<UserView>() {
+    private val userLogin: String?
+) : MvpPresenter<UserView>() {
+
+    private var disposable = CompositeDisposable()
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-       loadData()
+        loadData()
     }
 
-     fun loadData(){
-         //получаем информацию о пользователе
-         userLogin?.let {
-             val user = usersRepo.getUser(it)
+    private fun loadData() {
+        userLogin?.let {
+            disposable.add(
+                usersRepository
+                    .getUser(it)
+                    .subscribe(
+                        { githubUser -> viewState.showUser(githubUser.login) },
+                        { exception -> viewState.showException(exception) }
+                    )
+            )
+        }
+    }
 
-             //уведомляем view о том, что получили информацию о пользователе
-             user.let { githubUser ->
-                 viewState.showUser(githubUser.login)
-             }
-         }
-     }
+    override fun destroyView(view: UserView?) {
+        disposable.dispose()
+    }
+
+    fun backPressed(): Boolean {
+        router.exit()
+        return true
+    }
 
 }

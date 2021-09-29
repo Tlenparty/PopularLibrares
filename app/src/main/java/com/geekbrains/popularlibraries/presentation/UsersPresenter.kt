@@ -5,20 +5,19 @@ import com.geekbrains.popularlibraries.framework.ui.adapters.UserItemView
 import com.geekbrains.popularlibraries.framework.ui.screens.UserScreen
 import com.geekbrains.popularlibraries.framework.ui.view.users_fragment.UsersView
 import com.geekbrains.popularlibraries.model.entites.GithubUser
-import com.geekbrains.popularlibraries.model.entites.GithubUsersRepo
+import com.geekbrains.popularlibraries.model.repositories.GithubUsersLocalRepositoryImpl
 import com.github.terrakok.cicerone.Router
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import moxy.MvpPresenter
 
 class UsersPresenter(
-    private val usersRepo: GithubUsersRepo,
-    val router: Router
+    private val usersRepository: GithubUsersLocalRepositoryImpl,
+    private val router: Router
 ) : MvpPresenter<UsersView>() {
 
-    class UserListPresenter: IUserListPresenter {
+    class UserListPresenter : IUserListPresenter {
         val users = mutableListOf<GithubUser>()
-
         override var itemClickListener: ((UserItemView) -> Unit)? = null
-
         override fun bindView(view: UserItemView) {
             val user = users[view.currentPosition]
             view.setLogin(user.login)
@@ -29,6 +28,7 @@ class UsersPresenter(
     }
 
     val usersListPresenter = UserListPresenter()
+    private var disposable = CompositeDisposable()
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -40,12 +40,19 @@ class UsersPresenter(
         }
     }
 
-    private fun loadData(){
-        // получение данных из репозитория
-        val users = usersRepo.getUsers()
-        // отдаем данные презентеру списка
-        usersListPresenter.users.addAll(users)
-        // командуем View обновить спискок
+    private fun loadData() {
+        // подписываемся на поток списка пользователей
+        disposable.add(
+            usersRepository
+                .getUsers()
+                .subscribe(
+                    { gitHubUser -> usersListPresenter.users.addAll(gitHubUser) },
+                    { exception -> viewState.showException(exception) }
+                ))
         viewState.updateList()
+    }
+
+    override fun destroyView(view: UsersView?) {
+        disposable.dispose()
     }
 }

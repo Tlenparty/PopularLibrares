@@ -7,20 +7,21 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.geekbrains.popularlibrares.databinding.FragmentUserBinding
+import com.geekbrains.popularlibraries.extentions.showToast
 import com.geekbrains.popularlibraries.framework.App.Companion.router
-import com.geekbrains.popularlibraries.model.entites.GithubUser
-import com.geekbrains.popularlibraries.model.entites.GithubUsersRepo
+import com.geekbrains.popularlibraries.framework.ui.view.BackButtonListener
+import com.geekbrains.popularlibraries.model.repositories.GithubUsersLocalRepositoryImpl
 import com.geekbrains.popularlibraries.presentation.UserPresenter
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
 
-class UserFragment : MvpAppCompatFragment(), UserView {
+class UserFragment : MvpAppCompatFragment(), UserView, BackButtonListener {
     private lateinit var binding: FragmentUserBinding
     private val userLogin by lazy { arguments?.getString(USER_LOGIN) }
     private val presenter by moxyPresenter {
         UserPresenter(
-            GithubUsersRepo(),
+            GithubUsersLocalRepositoryImpl(),
             router,
             userLogin
         )
@@ -46,6 +47,12 @@ class UserFragment : MvpAppCompatFragment(), UserView {
     override fun showUser(userLogin: String) {
         binding.userName.text = userLogin
     }
+
+    override fun showException(exception: Throwable) {
+        context?.showToast(exception.message)
+    }
+
+    override fun backPressed() = presenter.backPressed()
 }
 
 
