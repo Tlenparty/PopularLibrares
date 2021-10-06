@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.geekbrains.popularlibrares.databinding.FragmentUserBinding
+import com.geekbrains.popularlibraries.PopularLibraries.Navigation.router
 import com.geekbrains.popularlibraries.extentions.showToast
-import com.geekbrains.popularlibraries.framework.App.Companion.router
 import com.geekbrains.popularlibraries.framework.ui.view.BackButtonListener
 import com.geekbrains.popularlibraries.model.repositories.GithubUsersLocalRepositoryImpl
 import com.geekbrains.popularlibraries.presentation.UserPresenter

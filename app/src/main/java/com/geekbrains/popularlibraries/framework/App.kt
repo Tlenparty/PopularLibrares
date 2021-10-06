@@ -4,6 +4,7 @@ import android.app.Application
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.Router
 
+/*
 class App : Application() {
 
     companion object {
@@ -15,3 +16,4 @@ class App : Application() {
         val router get() = cicerone.router
     }
 }
+*/

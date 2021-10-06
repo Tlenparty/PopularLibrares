@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.widget.Toast
 import com.geekbrains.popularlibrares.R
 import com.geekbrains.popularlibrares.databinding.ActivityMainBinding
+import com.geekbrains.popularlibraries.PopularLibraries.Navigation.navigatorHolder
+import com.geekbrains.popularlibraries.PopularLibraries.Navigation.router
 import com.geekbrains.popularlibraries.framework.ui.view.main_activity.MainView
-import com.geekbrains.popularlibraries.framework.App.Companion.navigatorHolder
-import com.geekbrains.popularlibraries.framework.App.Companion.router
 import com.geekbrains.popularlibraries.framework.ui.screens.ConverterScreen
 import com.geekbrains.popularlibraries.framework.ui.screens.UsersScreen
 import com.geekbrains.popularlibraries.model.network.NetworkState
@@ -21,9 +21,9 @@ import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 import java.util.concurrent.TimeUnit
 
-class MainActivity : MvpAppCompatActivity() {
+class MainActivity : MvpAppCompatActivity(), MainView {
 
-    private val navigator = AppNavigator(this, R.id.content)
+    private val navigator = AppNavigator(this, android.R.id.content)
 
     override fun onResumeFragments() {
         super.onResumeFragments()
