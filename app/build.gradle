@@ -41,7 +41,7 @@ android {
 
 dependencies {
 
-    //AppCompat
+    // AppCompat
     implementation 'androidx.appcompat:appcompat:1.3.1'
     // Cicirone
     implementation 'com.github.terrakok:cicerone:7.0'
@@ -53,16 +53,19 @@ dependencies {
     kapt "com.github.moxy-community:moxy-compiler:2.1.2"
     implementation "com.github.moxy-community:moxy-ktx:2.1.2"
     implementation "com.github.moxy-community:moxy-androidx:2.1.2"
-    //RxJava
-    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
-    implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
+    // RxJava
+    implementation "io.reactivex.rxjava2:rxjava:2.2.20"
+    implementation "io.reactivex.rxjava2:rxkotlin:2.4.0"
+    implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
     // RecyclerView
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     // Tests
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-    //UI
+    // ViewBindingProperty
+    implementation 'com.github.kirich1409:viewbindingpropertydelegate:1.4.6'
+    // UI
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
 }
