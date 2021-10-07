@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.geekbrains.popularlibrares.databinding.FragmentUsersBinding
+import com.geekbrains.popularlibraries.PopularLibraries.Navigation.router
 import com.geekbrains.popularlibraries.extentions.showToast
-import com.geekbrains.popularlibraries.framework.App.Companion.router
 import com.geekbrains.popularlibraries.framework.ui.adapters.UsersRVAdapter
 import com.geekbrains.popularlibraries.model.repositories.GithubUsersLocalRepositoryImpl
 import com.geekbrains.popularlibraries.presentation.UsersPresenter

@@ -3,7 +3,7 @@ package com.geekbrains.popularlibraries.presentation
 import com.geekbrains.popularlibraries.framework.ui.view.user_fragment.UserView
 import com.geekbrains.popularlibraries.model.repositories.GithubUsersLocalRepositoryImpl
 import com.github.terrakok.cicerone.Router
-import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.disposables.CompositeDisposable
 import moxy.MvpPresenter
 
 class UserPresenter(

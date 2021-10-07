@@ -2,10 +2,10 @@ package com.geekbrains.popularlibraries.model.repositories
 
 import com.geekbrains.popularlibraries.model.entites.GithubUser
 import com.geekbrains.popularlibraries.model.entites.GithubUsersRepository
-import io.reactivex.rxjava3.annotations.NonNull
-import io.reactivex.rxjava3.core.Maybe
-import io.reactivex.rxjava3.core.Single
-import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.Maybe
+import io.reactivex.Single
+import io.reactivex.annotations.NonNull
+import io.reactivex.disposables.Disposable
 
 class GithubUsersLocalRepositoryImpl : GithubUsersRepository, @NonNull Disposable {
     private val repositories = listOf(

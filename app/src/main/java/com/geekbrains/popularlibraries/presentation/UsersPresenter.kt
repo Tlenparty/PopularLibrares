@@ -7,7 +7,7 @@ import com.geekbrains.popularlibraries.framework.ui.view.users_fragment.UsersVie
 import com.geekbrains.popularlibraries.model.entites.GithubUser
 import com.geekbrains.popularlibraries.model.repositories.GithubUsersLocalRepositoryImpl
 import com.github.terrakok.cicerone.Router
-import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.disposables.CompositeDisposable
 import moxy.MvpPresenter
 
 class UsersPresenter(
