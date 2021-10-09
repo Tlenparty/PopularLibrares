@@ -5,4 +5,6 @@ package com.geekbrains.popularlibraries.framework.ui.adapters
  */
 interface UserItemView:IItemView {
     fun setLogin(text:String)
+
+    fun setAvatar(url: String)
 }

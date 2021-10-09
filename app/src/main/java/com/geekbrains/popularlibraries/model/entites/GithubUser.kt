@@ -1,7 +1,16 @@
 package com.geekbrains.popularlibraries.model.entites
 
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
-@Parcelize
-class GithubUser(val login: String): Parcelable
+data class GithubUser(
+    @SerializedName("id")
+    val id: String? = null,
+
+    @SerializedName("login")
+    var login: String,
+
+    @SerializedName("avatar_url")
+    val avatarUrl: String? = null
+)
