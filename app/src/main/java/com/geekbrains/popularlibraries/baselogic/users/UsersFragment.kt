@@ -13,6 +13,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.geekbrains.popularlibrares.databinding.FragmentUsersBinding
 import com.geekbrains.popularlibraries.PopularLibraries.Navigation.router
 import com.geekbrains.popularlibraries.extentions.showToast
+import com.geekbrains.popularlibraries.framework.ui.images.GlideImageLoader
 import com.geekbrains.popularlibraries.helpers.scheduler.AppSchedulerFactory
 import com.geekbrains.popularlibraries.model.repositories.GithubUsersRepositoryFactory
 import moxy.MvpAppCompatFragment
@@ -38,7 +39,10 @@ class UsersFragment: MvpAppCompatFragment(), UsersView {
 
     override fun init() = with(binding) {
         rvUsers.layoutManager = LinearLayoutManager(context)
-        adapter = UsersRVAdapter(presenter.usersListPresenter)
+        adapter = UsersRVAdapter(
+            presenter.usersListPresenter
+          //  GlideImageLoader()
+         )
         rvUsers.adapter = adapter
         rvUsers.itemAnimator = DefaultItemAnimator()
         rvUsers.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))

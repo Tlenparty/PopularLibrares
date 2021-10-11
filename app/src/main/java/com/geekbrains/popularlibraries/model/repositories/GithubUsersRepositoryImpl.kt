@@ -5,8 +5,9 @@ import com.geekbrains.popularlibraries.model.entites.GithubUser
 import com.geekbrains.popularlibraries.model.entites.GithubUserRepository
 import com.geekbrains.popularlibraries.model.entites.GithubUsersRepository
 import io.reactivex.Single
-
+// Наш облачный источник (здесь можно истолькозвать filter, map, merge
 class GithubUsersRepositoryImpl(private val githubApi: GithubApi) : GithubUsersRepository {
+
     override fun getUsers(): Single<List<GithubUser>> = githubApi.getUsers()
 
     override fun getUser(userLogin: String): Single<GithubUser> = githubApi.getUser(userLogin)

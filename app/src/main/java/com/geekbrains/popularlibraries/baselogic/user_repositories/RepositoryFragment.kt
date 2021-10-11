@@ -10,7 +10,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.geekbrains.popularlibrares.databinding.FragmentRepositoryBinding
 import com.geekbrains.popularlibraries.PopularLibraries.Navigation.router
 import com.geekbrains.popularlibraries.extentions.showToast
-import com.geekbrains.popularlibraries.framework.ui.view.BackButtonListener
+import com.geekbrains.popularlibraries.baselogic.BackButtonListener
 import com.geekbrains.popularlibraries.helpers.scheduler.AppSchedulerFactory
 import com.geekbrains.popularlibraries.model.repositories.GithubUsersRepositoryFactory
 import moxy.MvpAppCompatFragment
@@ -44,9 +44,11 @@ class RepositoryFragment : MvpAppCompatFragment(), RepositoryView, BackButtonLis
         )
     }
 
-    override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?,
-                              savedInstanceState: Bundle?) =
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ) =
         binding.root
 
     override fun showInfo(text: String) {

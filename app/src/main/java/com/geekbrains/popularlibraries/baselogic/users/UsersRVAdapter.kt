@@ -7,8 +7,12 @@ import com.geekbrains.popularlibrares.databinding.FragmentMainRecyclerItemBindin
 import com.geekbrains.popularlibraries.extentions.setStartDrawableCircleImageFromUri
 import com.geekbrains.popularlibraries.framework.ui.adapters.IUserListPresenter
 import com.geekbrains.popularlibraries.framework.ui.adapters.UserItemView
+import com.geekbrains.popularlibraries.framework.ui.images.GlideImageLoader
 
-class UsersRVAdapter(private val presenter: IUserListPresenter) :
+class UsersRVAdapter(
+    private val presenter: IUserListPresenter,
+    //private val imageLoader:GlideImageLoader
+    ) :
     RecyclerView.Adapter<UsersRVAdapter.ViewHolder>() {
 
 
@@ -27,6 +31,7 @@ class UsersRVAdapter(private val presenter: IUserListPresenter) :
 
     override fun getItemCount(): Int = presenter.getCount()
 
+    // Благодаря inner можем доступаться к внешним полям UsersRVAdapter
     inner class ViewHolder(val vb: FragmentMainRecyclerItemBinding) :
         RecyclerView.ViewHolder(vb.root), UserItemView {
 
@@ -36,6 +41,7 @@ class UsersRVAdapter(private val presenter: IUserListPresenter) :
 
         override fun setAvatar(url: String) {
             vb.tvLogin.setStartDrawableCircleImageFromUri(url)
+        //    imageLoader.load(url,vb.tvAvatar)
         }
 
         override var currentPosition = -1

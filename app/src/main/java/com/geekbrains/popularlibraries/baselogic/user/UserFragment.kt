@@ -17,7 +17,7 @@ import com.geekbrains.popularlibraries.PopularLibraries.Navigation.router
 import com.geekbrains.popularlibraries.baselogic.user_repositories.RepositoryRVAdapter
 import com.geekbrains.popularlibraries.extentions.dp
 import com.geekbrains.popularlibraries.extentions.showToast
-import com.geekbrains.popularlibraries.framework.ui.view.BackButtonListener
+import com.geekbrains.popularlibraries.baselogic.BackButtonListener
 import com.geekbrains.popularlibraries.helpers.scheduler.AppSchedulerFactory
 import com.geekbrains.popularlibraries.model.entites.GithubUser
 import com.geekbrains.popularlibraries.model.repositories.GithubUsersRepositoryFactory

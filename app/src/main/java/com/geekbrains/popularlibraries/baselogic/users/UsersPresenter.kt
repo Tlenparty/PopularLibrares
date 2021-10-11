@@ -22,6 +22,7 @@ class UsersPresenter(
         override fun bindView(view: UserItemView) {
             val user = users[view.currentPosition]
             view.setLogin(user.login)
+            // view.setAvatar(user.avatarUrl.orEmpty())
             //добавим аватарку
             user.avatarUrl?.let {
                 view.setAvatar(it)
@@ -49,7 +50,7 @@ class UsersPresenter(
         disposables +=
             usersRepository
                 .getUsers()
-                .observeOn(appSchedulers.main())
+                .observeOn(appSchedulers.main()) // указывваем на каком потоке хоти получить данные
                 .subscribeOn(appSchedulers.background()) //обработку делаем в отдельном потоке
                 .subscribe(
                     { gitHubUsers ->
