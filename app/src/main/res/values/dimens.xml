@@ -3,4 +3,6 @@
     <dimen name="border_padding">16dp</dimen>
     <dimen name="view_padding">8dp</dimen>
     <dimen name="zero_size">0dp</dimen>
+    <dimen name="repository_text_size">16sp</dimen>
+    <dimen name="login_text_size">18sp</dimen>
 </resources>
