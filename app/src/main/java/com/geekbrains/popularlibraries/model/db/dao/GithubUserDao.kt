@@ -15,7 +15,7 @@ interface GithubUserDao {
     //вставить пользователей
     //onConflict если добавляем пользователя, который есть уже в бд с таким primary key то REPLACE
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(users: List<GithubUser>)
+    fun insert(users: List<GithubUser>): Completable
 
     //получить пользователей из таблцы
     @Query("select * from ${AppDB.TABLE_USERS}")

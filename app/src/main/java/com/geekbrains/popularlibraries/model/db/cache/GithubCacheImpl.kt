@@ -3,14 +3,15 @@ package com.geekbrains.popularlibraries.model.db.cache
 import com.geekbrains.popularlibraries.model.db.AppDB
 import com.geekbrains.popularlibraries.model.entites.GithubUser
 import com.geekbrains.popularlibraries.model.entites.GithubUserRepository
+import io.reactivex.Completable
 import io.reactivex.Single
 
 class GithubCacheImpl(private val appDB: AppDB):IGithubCache {
 
     //добавить пользователей в базу
-    override fun insertUsers(users: List<GithubUser>) {
+    override fun insertUsers(users: List<GithubUser>): Completable =
         appDB.githubUserDao().insert(users)
-    }
+
 
     //получить список пользователей
     override fun getUsers(): Single<List<GithubUser>> = appDB.githubUserDao().getUsers()
@@ -19,14 +20,14 @@ class GithubCacheImpl(private val appDB: AppDB):IGithubCache {
     override fun getUser(userLogin: String): Single<GithubUser> = appDB.githubUserDao().getUser(userLogin)
 
     //добавить репозиторий в базу
-    override fun insertRepository(repository: GithubUserRepository) {
+    override fun insertRepository(repository: GithubUserRepository): Completable =
         appDB.githubUserRepositoryDao().insert(listOf(repository))
-    }
+
 
     //добавить репозитории в базу
-    override fun insertRepositories(repositories: List<GithubUserRepository>) {
+    override fun insertRepositories(repositories: List<GithubUserRepository>): Completable =
         appDB.githubUserRepositoryDao().insert(repositories)
-    }
+
 
     //получить список репозиториев по логину пользователя
     override fun getRepositoriesOnUserLogin(userLogin: String): Single<List<GithubUserRepository>> =

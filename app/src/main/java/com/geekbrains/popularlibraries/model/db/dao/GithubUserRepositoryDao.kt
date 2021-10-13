@@ -3,6 +3,7 @@ package com.geekbrains.popularlibraries.model.db.dao
 import androidx.room.*
 import com.geekbrains.popularlibraries.model.db.AppDB
 import com.geekbrains.popularlibraries.model.entites.GithubUserRepository
+import io.reactivex.Completable
 import io.reactivex.Single
 
 @Dao
@@ -10,7 +11,7 @@ interface GithubUserRepositoryDao {
 
     //вставить репозитории
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(repositories: List<GithubUserRepository>)
+    fun insert(repositories: List<GithubUserRepository>): Completable
 
     //получить пользователей
     @Query("select r.* " +
