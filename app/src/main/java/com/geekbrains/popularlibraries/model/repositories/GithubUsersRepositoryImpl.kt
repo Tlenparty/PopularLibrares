@@ -18,13 +18,13 @@ class GithubUsersRepositoryImpl(
         //если есть интернет, то тянем данные из него, в противном случае - закешированные из базы
         networkStatus
             .isOnlineSingle()
-                // На каждую смену онлайна
+            // На каждую смену онлайна
             .flatMap { internetEnable ->
                 if (internetEnable) {
                     githubApi
                         //получаем пользователей из интернета
                         .getUsers()
-                            //Maps the success value of the upstream Single into
+                        //Maps the success value of the upstream Single into
                         // an Iterable and emits its items as an Observable sequence.
                         .flattenAsObservable { users ->
                             //закешируем полученных пользователей
@@ -35,7 +35,7 @@ class GithubUsersRepositoryImpl(
                 } else {
                     githubCache.getUsers()
                 }
-            }
+            }.doOnDispose { networkStatus.unBind() }
 
     override fun getUser(userLogin: String): Single<GithubUser> =
         //если есть интернет, то тянем данные из него, в противном случае - закешированные из базы
@@ -55,6 +55,7 @@ class GithubUsersRepositoryImpl(
                     githubCache.getUser(userLogin)
                 }
             }
+            .doOnDispose { networkStatus.unBind() }
 
     override fun getRepositories(login: String): Single<List<GithubUserRepository>> =
         networkStatus
@@ -77,7 +78,7 @@ class GithubUsersRepositoryImpl(
                 } else {
                     githubCache.getRepositoriesOnUserLogin(login)
                 }
-            }
+            }.doOnDispose { networkStatus.unBind() }
 
     override fun getRepository(
         login: String,
@@ -100,5 +101,5 @@ class GithubUsersRepositoryImpl(
                 } else {
                     githubCache.getRepositoryOnUserLogin(login, repositoryName)
                 }
-            }
+            }.doOnDispose { networkStatus.unBind() }
 }

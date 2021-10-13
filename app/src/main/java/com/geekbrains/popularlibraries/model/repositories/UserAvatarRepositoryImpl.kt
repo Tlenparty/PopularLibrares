@@ -66,7 +66,9 @@ class UserAvatarRepositoryImpl(
                     Glide.with(context)
                         .load(avatarFile)
                 }
-            }.blockingGet()
+            }
+            .doOnDispose { networkStatus.unBind() }
+            .blockingGet()
     }
 
 }

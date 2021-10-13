@@ -6,4 +6,5 @@ import io.reactivex.Single
 interface INetworkStatus {
     fun isOnline(): Observable<Boolean>
     fun isOnlineSingle(): Single<Boolean>
+    fun unBind()
 }
