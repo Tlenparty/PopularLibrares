@@ -1,4 +1,4 @@
-package com.geekbrains.popularlibraries.model.network
+package com.geekbrains.popularlibraries.helpers.network
 
 import android.content.Context
 import android.net.ConnectivityManager

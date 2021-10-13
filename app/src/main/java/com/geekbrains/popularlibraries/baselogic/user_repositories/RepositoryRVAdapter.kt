@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.popularlibrares.databinding.RepositoryItemViewBinding
 import com.geekbrains.popularlibraries.model.repositories.RepositoryListPresenter
 
-class RepositoryRVAdapter(private val presenterRepository: RepositoryListPresenter): RecyclerView.Adapter<RepositoryRVAdapter.ViewHolder>() {
+class RepositoryRVAdapter(
+    private val presenterRepository: RepositoryListPresenter
+    ): RecyclerView.Adapter<RepositoryRVAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ViewHolder(RepositoryItemViewBinding.inflate(LayoutInflater.from(parent.context), parent, false))

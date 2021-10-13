@@ -16,23 +16,28 @@ import com.geekbrains.popularlibraries.extentions.showToast
 import com.geekbrains.popularlibraries.framework.ui.images.GlideImageLoader
 import com.geekbrains.popularlibraries.helpers.scheduler.AppSchedulerFactory
 import com.geekbrains.popularlibraries.model.repositories.GithubUsersRepositoryFactory
+import com.geekbrains.popularlibraries.model.repositories.UserAvatarRepositoryFactory
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
-class UsersFragment: MvpAppCompatFragment(), UsersView {
+class UsersFragment : MvpAppCompatFragment(), UsersView {
 
     private val binding: FragmentUsersBinding by viewBinding(createMethod = CreateMethod.INFLATE)
-    private val presenter by moxyPresenter { UsersPresenter(
-        GithubUsersRepositoryFactory.create(),
-        AppSchedulerFactory.create(),
-        router) }
+    private val presenter by moxyPresenter {
+        UsersPresenter(
+            GithubUsersRepositoryFactory.create(requireContext()),
+            AppSchedulerFactory.create(),
+            UserAvatarRepositoryFactory.create(requireContext()),
+            router
+        )
+    }
     private var adapter: UsersRVAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View  {
+    ): View {
         initListeners()
         return binding.root
     }
@@ -40,9 +45,10 @@ class UsersFragment: MvpAppCompatFragment(), UsersView {
     override fun init() = with(binding) {
         rvUsers.layoutManager = LinearLayoutManager(context)
         adapter = UsersRVAdapter(
-            presenter.usersListPresenter
-          //  GlideImageLoader()
-         )
+            presenter.usersListPresenter,
+            //  GlideImageLoader()
+            UserAvatarRepositoryFactory.create(requireContext())
+        )
         rvUsers.adapter = adapter
         rvUsers.itemAnimator = DefaultItemAnimator()
         rvUsers.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))

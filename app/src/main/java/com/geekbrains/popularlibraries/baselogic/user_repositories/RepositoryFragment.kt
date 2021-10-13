@@ -36,7 +36,7 @@ class RepositoryFragment : MvpAppCompatFragment(), RepositoryView, BackButtonLis
 
     private val presenter by moxyPresenter {
         RepositoryPresenter(
-            GithubUsersRepositoryFactory.create(),
+            GithubUsersRepositoryFactory.create(requireContext()),
             AppSchedulerFactory.create(),
             router,
             userLogin,

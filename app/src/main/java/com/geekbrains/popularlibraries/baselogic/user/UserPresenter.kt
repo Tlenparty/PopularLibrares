@@ -5,6 +5,7 @@ import com.geekbrains.popularlibraries.helpers.scheduler.AppSchedulers
 import com.geekbrains.popularlibraries.helpers.screens.RepositoryScreen
 import com.geekbrains.popularlibraries.model.entites.GithubUsersRepository
 import com.geekbrains.popularlibraries.model.repositories.RepositoryListPresenter
+import com.geekbrains.popularlibraries.model.repositories.UserAvatarRepository
 import com.github.terrakok.cicerone.Router
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -15,6 +16,7 @@ class UserPresenter(
     router: Router,
     private val userLogin: String?,
     private val appSchedulers: AppSchedulers,
+    private val userAvatarRepository: UserAvatarRepository,
     val repositoryListPresenter: RepositoryListPresenter
 ) : BasePresenter<UserView>(router) {
 
@@ -75,7 +77,9 @@ class UserPresenter(
             .subscribeOn(appSchedulers.background()) //обработку делаем в отдельном потоке
             .subscribe(
                 //уведомляем view о том, что получили информацию о пользователе
-                { gitHubUser -> viewState.showUser(gitHubUser)},
+                { gitHubUser ->
+                    viewState.showUser(gitHubUser, userAvatarRepository.imageBuilder(gitHubUser))
+                },
 
                 { exception -> viewState.showException(exception) }
             )

@@ -1,6 +1,5 @@
 package com.geekbrains.popularlibraries.model.entites
 
-import io.reactivex.Maybe
 import io.reactivex.Single
 
 interface GithubUsersRepository {
