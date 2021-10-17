@@ -11,23 +11,27 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.geekbrains.popularlibrares.databinding.FragmentUsersBinding
-import com.geekbrains.popularlibraries.PopularLibraries.Navigation.router
+import com.geekbrains.popularlibraries.di.BaseDaggerFragment
 import com.geekbrains.popularlibraries.extentions.showToast
-import com.geekbrains.popularlibraries.framework.ui.images.GlideImageLoader
-import com.geekbrains.popularlibraries.helpers.scheduler.AppSchedulerFactory
-import com.geekbrains.popularlibraries.model.repositories.GithubUsersRepositoryFactory
-import com.geekbrains.popularlibraries.model.repositories.UserAvatarRepositoryFactory
-import moxy.MvpAppCompatFragment
+import com.geekbrains.popularlibraries.model.entites.GithubUsersRepository
+import com.geekbrains.popularlibraries.model.repositories.UserAvatarRepository
 import moxy.ktx.moxyPresenter
+import javax.inject.Inject
 
-class UsersFragment : MvpAppCompatFragment(), UsersView {
+class UsersFragment : BaseDaggerFragment(), UsersView {
+
+    @Inject
+    lateinit var githubUsersRepository: GithubUsersRepository
+
+    @Inject
+    lateinit var userAvatarRepository: UserAvatarRepository
 
     private val binding: FragmentUsersBinding by viewBinding(createMethod = CreateMethod.INFLATE)
     private val presenter by moxyPresenter {
         UsersPresenter(
-            GithubUsersRepositoryFactory.create(requireContext()),
-            AppSchedulerFactory.create(),
-            UserAvatarRepositoryFactory.create(requireContext()),
+            githubUsersRepository,
+            appSchedulers,
+            userAvatarRepository,
             router
         )
     }
@@ -47,8 +51,9 @@ class UsersFragment : MvpAppCompatFragment(), UsersView {
         adapter = UsersRVAdapter(
             presenter.usersListPresenter,
             //  GlideImageLoader()
-            UserAvatarRepositoryFactory.create(requireContext())
+            userAvatarRepository
         )
+
         rvUsers.adapter = adapter
         rvUsers.itemAnimator = DefaultItemAnimator()
         rvUsers.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))

@@ -6,6 +6,7 @@ import com.geekbrains.popularlibraries.model.entites.GithubUsersRepository
 import com.github.terrakok.cicerone.Router
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.plusAssign
+import javax.inject.Inject
 
 class RepositoryPresenter(
     private val userRepository: GithubUsersRepository,

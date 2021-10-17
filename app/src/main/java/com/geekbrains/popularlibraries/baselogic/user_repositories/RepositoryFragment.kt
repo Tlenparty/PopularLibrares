@@ -8,15 +8,17 @@ import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.geekbrains.popularlibrares.databinding.FragmentRepositoryBinding
-import com.geekbrains.popularlibraries.PopularLibraries.Navigation.router
 import com.geekbrains.popularlibraries.extentions.showToast
 import com.geekbrains.popularlibraries.baselogic.BackButtonListener
-import com.geekbrains.popularlibraries.helpers.scheduler.AppSchedulerFactory
-import com.geekbrains.popularlibraries.model.repositories.GithubUsersRepositoryFactory
-import moxy.MvpAppCompatFragment
+import com.geekbrains.popularlibraries.di.BaseDaggerFragment
+import com.geekbrains.popularlibraries.model.entites.GithubUsersRepository
 import moxy.ktx.moxyPresenter
+import javax.inject.Inject
 
-class RepositoryFragment : MvpAppCompatFragment(), RepositoryView, BackButtonListener {
+class RepositoryFragment : BaseDaggerFragment(), RepositoryView, BackButtonListener {
+
+    @Inject
+    lateinit var githubUsersRepository: GithubUsersRepository
 
     companion object {
         const val USER_LOGIN = "userLogin"
@@ -36,8 +38,8 @@ class RepositoryFragment : MvpAppCompatFragment(), RepositoryView, BackButtonLis
 
     private val presenter by moxyPresenter {
         RepositoryPresenter(
-            GithubUsersRepositoryFactory.create(requireContext()),
-            AppSchedulerFactory.create(),
+            githubUsersRepository,
+            appSchedulers,
             router,
             userLogin,
             repositoryName

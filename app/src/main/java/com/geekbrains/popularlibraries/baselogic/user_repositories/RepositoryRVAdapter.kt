@@ -5,8 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.popularlibrares.databinding.RepositoryItemViewBinding
 import com.geekbrains.popularlibraries.model.repositories.RepositoryListPresenter
+import javax.inject.Inject
 
-class RepositoryRVAdapter(
+class RepositoryRVAdapter @Inject constructor(
     private val presenterRepository: RepositoryListPresenter
     ): RecyclerView.Adapter<RepositoryRVAdapter.ViewHolder>() {
 

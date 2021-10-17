@@ -5,8 +5,9 @@ import com.geekbrains.popularlibraries.model.entites.GithubUser
 import com.geekbrains.popularlibraries.model.entites.GithubUserRepository
 import io.reactivex.Completable
 import io.reactivex.Single
+import javax.inject.Inject
 
-class GithubCacheImpl(private val appDB: AppDB):IGithubCache {
+class GithubCacheImpl @Inject constructor(private val appDB: AppDB):IGithubCache {
 
     //добавить пользователей в базу
     override fun insertUsers(users: List<GithubUser>): Completable =

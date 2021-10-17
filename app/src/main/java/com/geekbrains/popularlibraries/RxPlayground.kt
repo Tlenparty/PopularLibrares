@@ -59,7 +59,7 @@ fun main() {
     Thread.sleep(15000)
 }
 
-fun clearAllNonLetterChars(word: String): Observable<String> =
+fun clearAllNonLetterChars(word: kotlin.String): Observable<kotlin.String> =
     Observable.fromIterable(word.asIterable())
         .filter(Char::isLetter) // филтрует
         .observeOn(Schedulers.newThread()) // работает на downStream на том планировщие что указан
@@ -69,5 +69,5 @@ fun clearAllNonLetterChars(word: String): Observable<String> =
         .delay(random.nextLong(500), TimeUnit.MILLISECONDS, Schedulers.io())
         .toObservable()
 
-fun onWord(word: String) = println(word)
+fun onWord(word: kotlin.String) = println(word)
 fun onError(error: Throwable) = print(error.localizedMessage)

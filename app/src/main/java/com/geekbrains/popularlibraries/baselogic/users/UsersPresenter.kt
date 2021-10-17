@@ -11,8 +11,9 @@ import com.geekbrains.popularlibraries.model.entites.GithubUsersRepository
 import com.geekbrains.popularlibraries.model.repositories.UserAvatarRepository
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxkotlin.plusAssign
+import javax.inject.Inject
 
-class UsersPresenter(
+class UsersPresenter constructor(
     private val usersRepository: GithubUsersRepository,
     private val appSchedulers: AppSchedulers,
     private val userAvatarRepository: UserAvatarRepository,

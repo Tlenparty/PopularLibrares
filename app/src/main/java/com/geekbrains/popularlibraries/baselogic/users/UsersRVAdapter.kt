@@ -10,8 +10,9 @@ import com.geekbrains.popularlibraries.framework.ui.adapters.UserItemView
 import com.geekbrains.popularlibraries.framework.ui.images.GlideImageLoader
 import com.geekbrains.popularlibraries.model.entites.GithubUser
 import com.geekbrains.popularlibraries.model.repositories.UserAvatarRepository
+import javax.inject.Inject
 
-class UsersRVAdapter(
+class UsersRVAdapter constructor(
     private val presenter: IUserListPresenter,
     //private val imageLoader:GlideImageLoader
     private val userAvatarRepository: UserAvatarRepository

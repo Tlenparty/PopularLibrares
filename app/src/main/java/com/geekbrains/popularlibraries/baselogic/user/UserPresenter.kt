@@ -10,8 +10,9 @@ import com.github.terrakok.cicerone.Router
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.plusAssign
+import javax.inject.Inject
 
-class UserPresenter(
+class UserPresenter constructor(
     private val userRepository: GithubUsersRepository,
     router: Router,
     private val userLogin: String?,

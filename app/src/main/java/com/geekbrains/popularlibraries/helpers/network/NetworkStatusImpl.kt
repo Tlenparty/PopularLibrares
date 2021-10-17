@@ -5,9 +5,10 @@ import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkRequest
 import io.reactivex.subjects.BehaviorSubject
+import javax.inject.Inject
 
 //проверка наличия интернета
-class NetworkStatusImpl(context: Context) : INetworkStatus {
+class NetworkStatusImpl @Inject constructor(context: Context) : INetworkStatus {
 
     private val statusSubject: BehaviorSubject<Boolean> = BehaviorSubject.create()
     private val networkCallback: ConnectivityManager.NetworkCallback

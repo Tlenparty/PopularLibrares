@@ -17,8 +17,9 @@ import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import java.io.File
 import java.io.FileOutputStream
+import javax.inject.Inject
 
-class UserAvatarRepositoryImpl(
+class UserAvatarRepositoryImpl @Inject constructor(
     private val context: Context,
     private val networkStatus: INetworkStatus
 ) : UserAvatarRepository {

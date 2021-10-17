@@ -35,6 +35,8 @@ android {
         rxjava3Version = '3.0.0'
         retrofit2Version = '2.9.0'
         roomVersion = '2.3.0'
+        daggerVersion = '2.37'
+        kaptDaggerVersion = '2.35.1'
     }*/
 
     compileOptions {
@@ -93,4 +95,11 @@ dependencies {
     // UI
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
+    // Dagger 2
+    implementation "com.google.dagger:dagger:2.37"
+    implementation "com.google.dagger:dagger-android:2.37"
+    implementation "com.google.dagger:dagger-android-support:2.37"
+
+    kapt "com.google.dagger:dagger-compiler:2.35.1"
+    kapt "com.google.dagger:dagger-android-processor:2.35.1"
 }

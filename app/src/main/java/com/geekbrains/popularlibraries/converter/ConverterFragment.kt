@@ -11,19 +11,23 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import moxy.MvpAppCompatFragment
 import com.geekbrains.popularlibrares.R
 import com.geekbrains.popularlibrares.databinding.FragmentConverterBinding
+import com.geekbrains.popularlibraries.di.BaseDaggerFragment
 import com.geekbrains.popularlibraries.extentions.click
-import com.geekbrains.popularlibraries.helpers.scheduler.SchedulersFactory
+import com.geekbrains.popularlibraries.model.repositories.UserAvatarRepository
 import moxy.ktx.moxyPresenter
+import javax.inject.Inject
 
-class ConverterFragment : MvpAppCompatFragment(), ConverterView {
+class ConverterFragment :BaseDaggerFragment(), ConverterView {
+
+    @Inject
+    lateinit var imageConverter: Converter
 
     private val presenter by moxyPresenter {
         ConverterPresenter(
-            converter = ConverterFactory.create(requireContext()),
-            schedulers = SchedulersFactory.create()
+            converter = imageConverter,
+            schedulers = appSchedulers
         )
     }
 

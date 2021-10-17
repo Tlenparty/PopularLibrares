@@ -11,36 +11,41 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.request.RequestOptions
 import com.geekbrains.popularlibrares.databinding.FragmentUserBinding
-import com.geekbrains.popularlibraries.PopularLibraries.Navigation.router
 import com.geekbrains.popularlibraries.baselogic.user_repositories.RepositoryRVAdapter
 import com.geekbrains.popularlibraries.extentions.dp
 import com.geekbrains.popularlibraries.extentions.showToast
 import com.geekbrains.popularlibraries.baselogic.BackButtonListener
-import com.geekbrains.popularlibraries.helpers.scheduler.AppSchedulerFactory
+import com.geekbrains.popularlibraries.di.BaseDaggerFragment
 import com.geekbrains.popularlibraries.model.entites.GithubUser
-import com.geekbrains.popularlibraries.model.repositories.GithubUsersRepositoryFactory
+import com.geekbrains.popularlibraries.model.entites.GithubUsersRepository
 import com.geekbrains.popularlibraries.model.repositories.RepositoryListPresenter
-import com.geekbrains.popularlibraries.model.repositories.UserAvatarRepositoryFactory
-import moxy.MvpAppCompatFragment
+import com.geekbrains.popularlibraries.model.repositories.UserAvatarRepository
 import moxy.ktx.moxyPresenter
+import javax.inject.Inject
 
 
-class UserFragment : MvpAppCompatFragment(), UserView, BackButtonListener {
+class UserFragment : BaseDaggerFragment(), UserView, BackButtonListener {
+
+    @Inject
+    lateinit var githubUsersRepository: GithubUsersRepository
+
+    @Inject
+    lateinit var userAvatarRepository: UserAvatarRepository
+
 
     private lateinit var binding: FragmentUserBinding
     private val userLogin by lazy { arguments?.getString(USER_LOGIN) }
     private var adapter: RepositoryRVAdapter? = null
     private val presenter by moxyPresenter {
         UserPresenter(
-            GithubUsersRepositoryFactory.create(requireContext()),
+            githubUsersRepository,
             router,
             userLogin,
-            AppSchedulerFactory.create(),
-            UserAvatarRepositoryFactory.create(requireContext()),
+            appSchedulers,
+            userAvatarRepository,
             RepositoryListPresenter()
         )
     }

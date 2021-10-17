@@ -1,14 +1,15 @@
 package com.geekbrains.popularlibraries.converter
 
 import android.net.Uri
-import com.geekbrains.popularlibraries.helpers.scheduler.Schedulers
+import com.geekbrains.popularlibraries.helpers.scheduler.AppSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
 import moxy.MvpPresenter
+import javax.inject.Inject
 
-class ConverterPresenter(
+class ConverterPresenter @Inject constructor(
     private val converter: Converter,
-    private val schedulers: Schedulers
+    private val schedulers: AppSchedulers
 ): MvpPresenter<ConverterView>() {
 
     private val disposables = CompositeDisposable()

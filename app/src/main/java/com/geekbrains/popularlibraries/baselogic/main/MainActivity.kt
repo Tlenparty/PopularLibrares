@@ -2,11 +2,12 @@ package com.geekbrains.popularlibraries.baselogic.main
 
 import android.os.Bundle
 import android.widget.Toast
-import com.geekbrains.popularlibraries.PopularLibraries.Navigation.navigatorHolder
-import com.geekbrains.popularlibraries.PopularLibraries.Navigation.router
 import com.geekbrains.popularlibraries.baselogic.BackButtonListener
+import com.geekbrains.popularlibraries.di.BaseDaggerActivity
 import com.geekbrains.popularlibraries.helpers.network.NetworkState
 import com.geekbrains.popularlibraries.helpers.network.NetworkStateObservable
+import com.github.terrakok.cicerone.NavigatorHolder
+import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -14,8 +15,9 @@ import io.reactivex.rxkotlin.plusAssign
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
-class MainActivity : MvpAppCompatActivity(), MainView {
+class MainActivity : BaseDaggerActivity(), MainView {
 
     private val navigator = AppNavigator(this, android.R.id.content)
     private val presenter by moxyPresenter { MainPresenter(router) }
