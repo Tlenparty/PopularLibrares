@@ -1,6 +1,7 @@
 package com.geekbrains.popularlibraries.baselogic.user
 
 import android.annotation.SuppressLint
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.request.RequestOptions
 import com.geekbrains.popularlibrares.databinding.FragmentUserBinding
 import com.geekbrains.popularlibraries.PopularLibraries.Navigation.router
@@ -22,6 +24,7 @@ import com.geekbrains.popularlibraries.helpers.scheduler.AppSchedulerFactory
 import com.geekbrains.popularlibraries.model.entites.GithubUser
 import com.geekbrains.popularlibraries.model.repositories.GithubUsersRepositoryFactory
 import com.geekbrains.popularlibraries.model.repositories.RepositoryListPresenter
+import com.geekbrains.popularlibraries.model.repositories.UserAvatarRepositoryFactory
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
@@ -33,15 +36,14 @@ class UserFragment : MvpAppCompatFragment(), UserView, BackButtonListener {
     private var adapter: RepositoryRVAdapter? = null
     private val presenter by moxyPresenter {
         UserPresenter(
-            GithubUsersRepositoryFactory.create(),
+            GithubUsersRepositoryFactory.create(requireContext()),
             router,
             userLogin,
             AppSchedulerFactory.create(),
+            UserAvatarRepositoryFactory.create(requireContext()),
             RepositoryListPresenter()
         )
     }
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -68,12 +70,11 @@ class UserFragment : MvpAppCompatFragment(), UserView, BackButtonListener {
         recyclerRepo.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
     }
 
-    override fun showUser(user: GithubUser) {
+    override fun showUser(user: GithubUser, requestBuilder: RequestBuilder<Drawable>) {
         binding.loginText.text = user.login
 
         //загружаем аватарку
-        Glide.with(requireContext())
-            .load(user.avatarUrl)
+        requestBuilder
             .apply(
                 RequestOptions
                     .circleCropTransform()

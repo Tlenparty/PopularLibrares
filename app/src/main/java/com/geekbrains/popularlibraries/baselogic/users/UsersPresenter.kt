@@ -8,12 +8,15 @@ import com.geekbrains.popularlibraries.helpers.screens.ImageCompressorScreen
 import com.geekbrains.popularlibraries.helpers.screens.UserScreen
 import com.geekbrains.popularlibraries.model.entites.GithubUser
 import com.geekbrains.popularlibraries.model.entites.GithubUsersRepository
+import com.geekbrains.popularlibraries.model.repositories.UserAvatarRepository
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxkotlin.plusAssign
 
 class UsersPresenter(
     private val usersRepository: GithubUsersRepository,
-    private val appSchedulers: AppSchedulers, router: Router
+    private val appSchedulers: AppSchedulers,
+    private val userAvatarRepository: UserAvatarRepository,
+    router: Router
 ) : BasePresenter<UsersView>(router) {
 
     class UserListPresenter : IUserListPresenter {
@@ -24,9 +27,7 @@ class UsersPresenter(
             view.setLogin(user.login)
             // view.setAvatar(user.avatarUrl.orEmpty())
             //добавим аватарку
-            user.avatarUrl?.let {
-                view.setAvatar(it)
-            }
+            view.setAvatar(user)
         }
 
         override fun getCount(): Int = users.size

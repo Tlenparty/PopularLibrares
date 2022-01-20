@@ -2,14 +2,16 @@ package com.geekbrains.popularlibraries.baselogic.main
 
 import android.annotation.SuppressLint
 import android.util.Log
+import com.geekbrains.popularlibraries.baselogic.BasePresenter
 import com.geekbrains.popularlibraries.helpers.screens.UsersScreen
 import com.github.terrakok.cicerone.Router
 import io.reactivex.Observable
 import moxy.MvpPresenter
+import timber.log.Timber
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-class MainPresenter(val router: Router): MvpPresenter<MainView>() {
+class MainPresenter(router: Router): BasePresenter<MainView>(router) {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -25,13 +27,9 @@ class MainPresenter(val router: Router): MvpPresenter<MainView>() {
                     TimeUnit.MILLISECONDS)
             }
             .subscribe(
-                { s -> Log.d("My", "onNext: $s") },
-                { Log.d("My", "onError: ${it.message}") }
+                { s -> Timber.d("onNext: " + s) },
+                { Timber.d("onError: " + it.message) }
             )
-    }
-
-    fun backPressed() {
-        router.exit()
     }
 
 }

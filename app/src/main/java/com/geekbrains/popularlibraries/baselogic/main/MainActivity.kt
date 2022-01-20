@@ -5,8 +5,8 @@ import android.widget.Toast
 import com.geekbrains.popularlibraries.PopularLibraries.Navigation.navigatorHolder
 import com.geekbrains.popularlibraries.PopularLibraries.Navigation.router
 import com.geekbrains.popularlibraries.baselogic.BackButtonListener
-import com.geekbrains.popularlibraries.model.network.NetworkState
-import com.geekbrains.popularlibraries.model.network.NetworkStateObservable
+import com.geekbrains.popularlibraries.helpers.network.NetworkState
+import com.geekbrains.popularlibraries.helpers.network.NetworkStateObservable
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable

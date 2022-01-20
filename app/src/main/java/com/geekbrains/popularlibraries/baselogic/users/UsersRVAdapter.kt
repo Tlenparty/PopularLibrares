@@ -8,11 +8,14 @@ import com.geekbrains.popularlibraries.extentions.setStartDrawableCircleImageFro
 import com.geekbrains.popularlibraries.framework.ui.adapters.IUserListPresenter
 import com.geekbrains.popularlibraries.framework.ui.adapters.UserItemView
 import com.geekbrains.popularlibraries.framework.ui.images.GlideImageLoader
+import com.geekbrains.popularlibraries.model.entites.GithubUser
+import com.geekbrains.popularlibraries.model.repositories.UserAvatarRepository
 
 class UsersRVAdapter(
     private val presenter: IUserListPresenter,
     //private val imageLoader:GlideImageLoader
-    ) :
+    private val userAvatarRepository: UserAvatarRepository
+) :
     RecyclerView.Adapter<UsersRVAdapter.ViewHolder>() {
 
 
@@ -39,9 +42,9 @@ class UsersRVAdapter(
             vb.tvLogin.text = text
         }
 
-        override fun setAvatar(url: String) {
-            vb.tvLogin.setStartDrawableCircleImageFromUri(url)
-        //    imageLoader.load(url,vb.tvAvatar)
+        override fun setAvatar(user: GithubUser) {
+            vb.tvLogin.setStartDrawableCircleImageFromUri(userAvatarRepository.imageBuilder(user))
+            //    imageLoader.load(url,vb.tvAvatar)
         }
 
         override var currentPosition = -1
